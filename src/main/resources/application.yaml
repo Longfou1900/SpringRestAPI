@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: ite-spring-rest-api
+
+server:
+  port: 9090
