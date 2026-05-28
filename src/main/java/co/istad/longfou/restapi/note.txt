@@ -1,2 +1,61 @@
 sensitive data is hide like Id
 record cannot change values
+
+decorat url standard
+#public
+Web layer
+-DTOs (no annotation) is for read data can only get (immutable)
+cannot set and use her with final
+-------- Service layer is middle ----------
+business logic
+----------------
+#private is internal
+repo layer work with db
+
+stateless is secure
+-not store user data vea jam steak steak only info in login not like product info or else
+stateful behavouir store cache login for use auto login after first time
+-store data user
+cacheability is restful web service support caching(RAM) and it is cache database
+
+Code-on-Demand is
+
+
++ key word
+side effect
+constrain
+
+--nextjs webserver frontend
+--springboot backend
+--database
+
+---exam----
+uniform UI
+stateless
+stateful
+
+
+----4.Richardson Maturity Model
+-lv0 the first lv api only post
+-lv1
+-lv2 http
+-lv3
+
+graphQL  or API
+
+http standard has 5
+1 info
+2 success
+3 redirect
+4
+5
+
+
+204 delete success and no reponse bcos deleted done
+400 bad request is maltform repuest mean reject signal sign !@#$%^&*(
+401 login not found
+
+workspace
+
+
+pathvar is for get value from

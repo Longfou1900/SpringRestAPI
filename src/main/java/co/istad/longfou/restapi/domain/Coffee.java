@@ -15,4 +15,7 @@ public class Coffee {
     private Integer id;
     private String name;
     private String description;
+    //add price atritute
+    private Double price;
+
 }
