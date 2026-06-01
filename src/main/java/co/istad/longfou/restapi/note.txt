@@ -59,3 +59,18 @@ workspace
 
 
 pathvar is for get value from
+
+---------------
+01-06-2026
+Search uses logic OR
+Filter uses logic AND
+===== Rule Validation =====
+@RestControllerAdvise is for control error
+constraints is rule set
+@Max @Min is for number
+@NotBlank is used for only String for retrieve spaces between left and right letters
+@Size is fixible num or text are ok
+
+step 1: put dependency
+step 2: declare constraints
+step 3: practice constraints in controller
