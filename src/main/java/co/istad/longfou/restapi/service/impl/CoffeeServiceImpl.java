@@ -25,7 +25,7 @@ public class CoffeeServiceImpl implements CoffeeService {
     public CoffeeResponse deleteCoffeeById(Long id) {
         Coffee coffee = coffeeRepository.getCoffees()
                 .stream()
-                .filter(c -> c.getId().equals(id.intValue()))
+                .filter(coffees -> coffees.getId().equals(id.intValue()))
                 .findFirst()
                 .orElseThrow(() ->
                         new ResponseStatusException(
