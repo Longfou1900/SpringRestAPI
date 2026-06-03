@@ -72,5 +72,5 @@ constraints is rule set
 @Size is fixible num or text are ok
 
 step 1: put dependency
-step 2: declare constraints
+step 2: declare constraints createNameRequest
 step 3: practice constraints in controller

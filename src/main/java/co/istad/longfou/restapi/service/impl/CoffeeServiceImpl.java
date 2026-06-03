@@ -3,9 +3,12 @@ package co.istad.longfou.restapi.service.impl;
 import co.istad.longfou.restapi.domain.Coffee;
 import co.istad.longfou.restapi.dto.CoffeeResponse;
 import co.istad.longfou.restapi.dto.CreateCoffeeRequest;
+import co.istad.longfou.restapi.dto.UpdateCoffeeRequest;
 import co.istad.longfou.restapi.repository.CoffeeRepostiory;
 import co.istad.longfou.restapi.service.CoffeeService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -16,13 +19,57 @@ public class CoffeeServiceImpl implements CoffeeService {
 
     //db
     private final CoffeeRepostiory coffeeRepository;
+//    private final CoffeeService coffeeService;
 
-//    private final List<Coffee> coffeebean;
+    @Override
+    public CoffeeResponse deleteCoffeeById(Long id) {
+        Coffee coffee = coffeeRepository.getCoffees()
+                .stream()
+                .filter(c -> c.getId().equals(id.intValue()))
+                .findFirst()
+                .orElseThrow(() ->
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                String.format("Coffee ID = %d doesn't exist", id)
+                        ));
+
+        coffeeRepository.getCoffees().remove(coffee);
+
+        return new CoffeeResponse(
+                coffee.getId(),
+                coffee.getName(),
+                coffee.getDescription()
+        );
+    }
+
+    @Override
+    public CoffeeResponse updateCoffeeById(Integer id, UpdateCoffeeRequest updateCoffeeRequest) {
+
+        //Validation coffee ID exist or not
+        return coffeeRepository.getCoffees()
+                .stream()
+                .filter(coffee -> coffee.getId().equals(id))
+                .findFirst()
+                .map(oldCoffee -> {
+                    oldCoffee.setName(updateCoffeeRequest.name());
+                    oldCoffee.setDescription(updateCoffeeRequest.description());
+                    oldCoffee.setPrice(updateCoffeeRequest.price());
+                    return oldCoffee;
+                })
+                .map(newCoffee -> new CoffeeResponse(newCoffee.getId(), newCoffee.getName(), newCoffee.getDescription()))
+//                .orElseThrow(() -> new RuntimeException("Coffee not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+//                        String.format("Coffee ID = %d  Not found", id)));
+                        String.format("Coffee ID = %d doesn't in databse", id)));
+    }
+
+    //    private final List<Coffee> coffeebean;
 
 //    public CoffeesesrviceImpl(CoffeeRepostiory coffeeRepostiory, List<Coffee> coffeeBean){
     public CoffeeServiceImpl(CoffeeRepostiory coffeeRepostiory){
         this.coffeeRepository = coffeeRepostiory;
 //        this.coffeebean = coffeeBean;
+//        this.coffeeService = coffeeService;
     }
 
     @Override

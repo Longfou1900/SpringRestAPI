@@ -3,6 +3,7 @@ package co.istad.longfou.restapi.repository;
 import co.istad.longfou.restapi.domain.Coffee;
 //import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -11,6 +12,10 @@ import java.util.List;
 
 @Repository
 public class CoffeeRepostiory {
+    @DeleteMapping("DELETE FROM coffees WHERE id = #{id}")
+    public boolean deleteById(Long id) {
+        return false;
+    }
 
     private final List<Coffee> coffees;
 
@@ -41,4 +46,6 @@ public class CoffeeRepostiory {
 //        return Arrays.asList(coffee, coffee2, coffee3);
         return coffees;
     }
+
+
 }
